@@ -1,16 +1,24 @@
 import { Card, Col, Button } from "react-bootstrap"
-export const SingleBook = ({book}) => {
+export const SingleBook = (props) => {
+  /* props  {
+   book: {
+    title: "",
+    price: ""
+   },
+   ciao: "pippo"
+  }
+  */ 
   return (
     <>
       <Col>
         <Card>
-          <Card.Img variant="top" src={book.img} />
+          <Card.Img variant="top" src={props.bookProp.img} />
           <Card.Body>
-            <Card.Title>{book.title}</Card.Title>
+            <Card.Title>{props.bookProp.title}</Card.Title>
             <Card.Text>
-             {book.price}
+             {props.bookProp.price}
             </Card.Text>
-            <Button variant="primary">{book.price}</Button>
+            <Button variant="primary">{props.bookProp.price}</Button>
           </Card.Body>
         </Card>
       </Col>

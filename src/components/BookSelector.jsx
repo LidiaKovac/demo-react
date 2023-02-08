@@ -9,53 +9,25 @@ import { SingleBook } from "./SingleBook"
 
 class BookSelector extends Component {
   state = {
-    categories: ["fantasy", "history", "horror", "romance", "scifi"],
-    books: [],
+    query: ""
   }
-  handleClick = (event) => {
-    console.log(event.target)
-    if (event.target.id === "fantasy") {
-      this.setState({
-        books: fantasy
-      })
-    }
-    if (event.target.id === "history") {
-      this.setState({
-        books: history
-      })
-    }
-    if (event.target.id === "horror") {
-      this.setState({
-        books: horror
-      })
-    }
-    if (event.target.id === "romance") {
-      this.setState({
-        books: romance
-      })
-    }
-    if (event.target.id === "scifi") {
-      this.setState({
-        books: scifi
-      })
-    }
+  filterBookList(ev) {
+    console.log(ev.target.value)
+    this.setState({
+      query: ev.target.value
+    })
   }
   render() {
     return (
       <>
-        {this.state.categories.map((cat, i) => {
-          return (
-            <div onClick={this.handleClick} id={cat} key={`tab-${i}`}>
-              {cat}
-            </div>
-          )
-        })}
+      <input type="text" onChange={(event)=> this.filterBookList(event)} />
+       
         <Row>
-            {
-                this.state.books.map((book)=> {
-                   return  <SingleBook book={book}/>
-                })
-            }
+          {fantasy.filter((book)=> {
+            return book.title.toLowerCase().includes(this.state.query.toLowerCase())
+          }).map((book) => {
+            return <SingleBook bookProp={book} />
+          })}
         </Row>
       </>
     )
